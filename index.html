@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Kölsch</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Pixelify+Sans:wght@400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <script>
+        const koelsch_list = [
+            {
+                name: "Reissdorf Kölsch",
+                img: "./img/reissdorf-koelsch.png"
+            },
+            {
+                name: "Früh Kölsch",
+                img: "./img/frueh-koelsch.png"
+            },
+            {
+                name: "Gaffel Kölsch",
+                img: "./img/gaffel-koelsch.png"
+            },
+            {
+                name: "Dom Kölsch",
+                img: "./img/dom-koelsch.png"
+            },
+            {
+                name: "Zunft Kölsch",
+                img: "./img/zunft-koelsch.png"
+            },
+            {
+                name: "Schreckenskammer Kölsch",
+                img: "./img/schreckenskammer-koelsch.png"
+            },
+            {
+                name: "Sester Kölsch",
+                img: "./img/sester-koelsch.png"
+            },
+            {
+                name: "Peters Kölsch",
+                img: "./img/peters-koelsch.png"
+            },
+            {
+                name: "Mühlen Kölsch",
+                img: "./img/muehlen-koelsch.png"
+            },
+            {
+                name: "Gilden Kölsch",
+                img: "./img/gilden-koelsch.png"
+            },
+            {
+                name: "Sünner Kölsch",
+                img: "./img/suenner-koelsch.jpeg"
+            },
+
+        ];
+        let koelschIdTaken = [];
+
+        function getRandomKoelschId(side) {
+            let randomId = Math.floor(Math.random() * koelsch_list.length);
+            if (koelschIdTaken.includes(randomId)) {
+                if(!checkEnd()) {
+                    return getRandomKoelschId();
+                } else {
+                    setEnd(side);
+                }
+                
+            }
+            koelschIdTaken.push(randomId);
+            return randomId;
+        }
+
+        function changeImageLeft() {
+            let randomId = getRandomKoelschId(0);
+            document.getElementById("imgLeft").src = koelsch_list[randomId].img;
+            document.getElementById("koelsch-left-name").innerText = koelsch_list[randomId].name;
+        }
+
+        function changeImageRight() {
+            randomId = getRandomKoelschId(1);
+            document.getElementById("imgRight").src = koelsch_list[randomId].img;
+            document.getElementById("koelsch-right-name").innerText = koelsch_list[randomId].name;
+        }
+
+        function checkEnd() {
+            if (koelschIdTaken.length === koelsch_list.length) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function setEnd(side) {
+            document.getElementById("koelsch-left-name").innerText = "";
+            document.getElementById("koelsch-right-name").innerText = "";
+            document.getElementById("textBelowMiddle").innerText = "Ihr favorisiertes Kölsch!";
+            if (side === 0) {
+                document.getElementById("imgRight").display = "none";
+            } else {
+                document.getElementById("imgLeft").display = "none";
+            }
+        }
+
+        window.onload = function () {
+            changeImageLeft();
+            changeImageRight();
+        }
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Das beste Kölsch</h1>
+    </header>
+
+    <div class="main">
+        <div class="imgContainer">
+            <div class="imgWrapper" onclick="changeImageRight();">
+                <img id="imgLeft" class="img" src="./img/reissdorf-koelsch.png" alt="Kölsch-1">
+            </div>
+        </div>
+
+        <div class="imgContainer">
+            <div class="imgWrapper" onclick="changeImageLeft();">
+                <img id="imgRight" class="img" src="./img/frueh-koelsch.png" alt="Kölsch-1">
+            </div>
+        </div>
+    </div>
+
+    <div class="textBelow">
+        <span id="koelsch-left-name" class="koelsch-name textBelowObj"></span>
+        <span id="textBelowMiddle" class="textBelowObj">gegen</span>
+        <span id="koelsch-right-name" class="koelsch-name textBelowObj"></span>
+    </div>
+</body>
+
+</html>
