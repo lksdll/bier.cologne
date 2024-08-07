@@ -96,13 +96,13 @@
         }
 
         function setEnd(side) {
-            document.getElementById("koelsch-left-name").innerText = "";
-            document.getElementById("koelsch-right-name").innerText = "";
+            document.getElementById("koelsch-left-name").style.display = "none";
+            document.getElementById("koelsch-right-name").style.display = "none";
             document.getElementById("textBelowMiddle").innerText = "Ihr favorisiertes Kölsch!";
             if (side === 0) {
-                document.getElementById("imgRight").display = "none";
+                document.getElementById("imgContainerLeft").style.display = "none";
             } else {
-                document.getElementById("imgLeft").display = "none";
+                document.getElementById("imgContainerRight").style.display = "none";
             }
         }
 
@@ -119,13 +119,13 @@
     </header>
 
     <div class="main">
-        <div class="imgContainer">
+        <div id="imgContainerLeft" class="imgContainer">
             <div class="imgWrapper" onclick="changeImageRight();">
                 <img id="imgLeft" class="img" src="./img/reissdorf-koelsch.png" alt="Kölsch-1">
             </div>
         </div>
 
-        <div class="imgContainer">
+        <div id="imgContainerRight" class="imgContainer">
             <div class="imgWrapper" onclick="changeImageLeft();">
                 <img id="imgRight" class="img" src="./img/frueh-koelsch.png" alt="Kölsch-1">
             </div>
